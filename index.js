@@ -55,19 +55,31 @@ app.post("/webhook", (req, res) => {
         // loop thru the entries
         for (const entry of body.entry) {
             // loop thru the changes
-            console.log(JSON.stringify(entry));
-            // for (const change in entry.changes) {
-            //     // put it in JSON and log it
-            //     console.log(JSON.stringify(change));
-            // };
+            for (const change of entry.changes) {
+                // see if the change is a mention
+                if (change.field === "mentions") {
+                    // fetch the comment id and media id
+                    const commentId = change.value.comment_id;
+                    const mediaId = change.value.media_id;
+                    console.log(`MENTION ${commentId} MEDIA ${mediaId}`);
+                    // fetch the comment text
+                    // const commentText = getCommentText(mediaId, commentId);
+                    // fetch the media url
+                    // const mediaUrl = getMediaUrl(mediaId);
+                    // ask chatgpt to explain the meme
+                    // const explanation = getExplanation(mediaUrl, commentText);
+                    // post the explanation as a comment reply
+                    // postCommentReply(mediaId, commentId, explanation);
+                };
+            };
         };
+        // return ok after processing ig requests
+        res.sendStatus(200);
         return;
-    }
-
+    };
 
     // Returns a '404 Not Found'
     res.sendStatus(404);
-
 });
 
 // listen for requests :)

@@ -29,18 +29,17 @@ const write = (data) => {
     fs.writeFile('data.json', data, (err) => { });
 };
 
-const getUsertags = async () => {
-    const
 
 
-    const main = async () => {
 
-        console.log("Running...");
-        await login();
-        console.log("Logged in!");
-        const dms = await jsonDMs();
-        write(dms);
-        console.log("Exiting successfully...");
-    };
+const main = async () => {
 
-    main();
+    console.log("Running...");
+    await login();
+    console.log("Logged in!");
+    const dms = await jsonDMs();
+    write(dms);
+    console.log("Exiting successfully...");
+};
+
+main();
