@@ -1,20 +1,30 @@
 {
-  "name": "meme-explainer",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "cron": "^3.1.7",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "instagram-private-api": "^1.46.1",
-    "request-promise": "^4.2.6"
-  }
+    "name": "meme-explainer",
+    "version": "0.0.1",
+    "description": "instagram meme explainer",
+    "engines": {
+        "node": "20.x"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "node test.js"
+    },
+    "dependencies": {
+        "ejs": "^3.1.9",
+        "express": "^4.15.2"
+    },
+    "devDependencies": {
+        "tape": "^5.7.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/adamwett/meme-explainer"
+    },
+    "keywords": [
+        "node",
+        "heroku",
+        "express"
+    ],
+    "license": "GPL-3.0-only"
 }
