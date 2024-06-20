@@ -1,46 +1,11 @@
-require("dotenv").config();
-const { IgApiClient } = require('instagram-private-api');
-const { get } = require('request-promise');
-const ig = new IgApiClient();
-const fs = require('node:fs');
+const express = require('express')
+const path = require('path')
 
-const login = async () => {
-    ig.state.generateDevice(process.env.IG_USERNAME);
-    await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
-};
+const PORT = process.env.PORT || 5001
 
-const post = async (url, caption) => {
-    const imageBuffer = await get({
-        url: url,
-        encoding: null,
-    });
-    await ig.publish.photo({
-        file: imageBuffer,
-        caption: caption,
-    });
-};
-
-const jsonDMs = async () => {
-    const [threads] = await ig.feed.directInbox().items();
-    return JSON.stringify(threads);
-};
-
-const write = (data) => {
-    fs.writeFile('data.json', data, (err) => { });
-};
-
-const getUsertags = async () => {
-    const
-
-
-    const main = async () => {
-
-        console.log("Running...");
-        await login();
-        console.log("Logged in!");
-        const dms = await jsonDMs();
-        write(dms);
-        console.log("Exiting successfully...");
-    };
-
-    main();
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))

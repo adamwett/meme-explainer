@@ -1,0 +1,31 @@
+{
+    "name": "meme-explainer",
+    "version": "0.3.0",
+    "description": "an instagram bot that explains memes you tag it in",
+    "engines": {
+        "node": "20.x"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "node test.js"
+    },
+    "dependencies": {
+        "ejs": "^3.1.9",
+        "express": "^4.15.2"
+    },
+    "devDependencies": {
+        "tape": "^5.7.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/adamwett/meme-explainer"
+    },
+    "keywords": [
+        "instagram",
+        "nodejs",
+        "heroku",
+        "express"
+    ],
+    "license": "GPLV3"
+}
