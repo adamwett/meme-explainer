@@ -52,23 +52,18 @@ app.post("/webhook", (req, res) => {
 
     // see if this is an instagram webhook request
     if (body.object === "instagram") {
-        // loop thru events
-        for (const event in body.entry) {
-            // get the webhook event
-            const webhookEvent = event.changes[0].value;
-            console.log(webhookEvent);
-            // get the sender PSID
-            const senderPsid = webhookEvent.sender_id;
-            console.log(`Sender PSID: ${senderPsid}`);
-
+        // loop thru the entries
+        for (const entry of body.entry) {
             // loop thru the changes
-            for (const change in event.changes) {
-                // put it in JSON and log it
-                console.log(JSON.stringify(change));
-            };
-        }
-        return;
+            console.log(JSON.stringify(entry));
+            // for (const change in entry.changes) {
+            //     // put it in JSON and log it
+            //     console.log(JSON.stringify(change));
+            // };
+        };
     }
+    return;
+}
 
     // Returns a '404 Not Found'
     res.sendStatus(404);
