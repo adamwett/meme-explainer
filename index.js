@@ -61,9 +61,9 @@ app.post("/webhook", (req, res) => {
             //     console.log(JSON.stringify(change));
             // };
         };
+        return;
     }
-    return;
-}
+
 
     // Returns a '404 Not Found'
     res.sendStatus(404);
