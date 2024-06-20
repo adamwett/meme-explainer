@@ -15,7 +15,7 @@ app.use(json());
 
 // Respond with 'Hello World' when a GET request is made to the homepage
 app.get("/", (_req, res) => {
-    res.send("Hello World");
+    res.send("https://adamwett.xyz/");
 });
 
 // Adds support for GET requests to our webhook
@@ -50,35 +50,29 @@ app.post("/webhook", (req, res) => {
     console.log("WEBHOOK CALLED");
     console.log(req.body);
 
-    // Checks if this is an event from a page subscription
-    if (body.object === "page") {
-        // Iterates over each entry - there may be multiple if batched
-
-        // biome-ignore lint: shut up
-        body.entry.forEach((entry) => {
-            // Gets the body of the webhook event
-            const webhookEvent = entry.messaging[0];
+    // see if this is an instagram webhook request
+    if (body.object === "instagram") {
+        // loop thru events
+        for (const event in body.entry) {
+            // get the webhook event
+            const webhookEvent = event.changes[0].value;
             console.log(webhookEvent);
-
-            // Get the sender PSID
-            const senderPsid = webhookEvent.sender.id;
+            // get the sender PSID
+            const senderPsid = webhookEvent.sender_id;
             console.log(`Sender PSID: ${senderPsid}`);
 
-            // Check if the event is a message or postback and
-            // pass the event to the appropriate handler function
-            if (webhookEvent.message) {
-                handleMessage(senderPsid, webhookEvent.message);
-            } else if (webhookEvent.postback) {
-                handlePostback(senderPsid, webhookEvent.postback);
-            }
-        });
-
-        // Returns a '200 OK' response to all requests
-        res.status(200).send("EVENT_RECEIVED");
-    } else {
-        // Returns a '404 Not Found' if event is not from a page subscription
-        res.sendStatus(404);
+            // loop thru the changes
+            for (const change in event.changes) {
+                // put it in JSON and log it
+                console.log(JSON.stringify(change));
+            };
+        }
+        return;
     }
+
+    // Returns a '404 Not Found'
+    res.sendStatus(404);
+
 });
 
 // listen for requests :)
